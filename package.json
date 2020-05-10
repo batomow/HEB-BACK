@@ -1,0 +1,24 @@
+{
+  "name": "HEB-BACK",
+  "version": "1.0.0",
+  "description": "backend para el HEB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/batomow/HEB-BACK.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/batomow/HEB-BACK/issues"
+  },
+  "homepage": "https://github.com/batomow/HEB-BACK#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^8.12.1"
+  }
+}
