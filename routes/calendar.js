@@ -47,18 +47,87 @@ router.post('/all', async (req, res)=>{
         monolito[`resume${n}`] = (validationSnapshots[n].data())
     }
 
-    const promises = [] 
-    for (f of fechas){
-        for (const day of DAYS){
-            promises.push(firestore.collection('user').doc(user).collection('week').doc(f).collection('days').doc(day).get())
-        }
-    }
-    const snapshots = await Promise.all(promises)
+    const snapshots = [] 
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[0]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[1]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[2]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[3]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[4]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[5]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[0]).collection('days').doc(DAYS[6]).get()
+    snapshots.push({...snapshot.data()})
+
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[0]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[1]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[2]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[3]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[4]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[5]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[1]).collection('days').doc(DAYS[6]).get()
+    snapshots.push({...snapshot.data()})
+
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[0]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[1]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[2]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[3]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[4]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[5]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[2]).collection('days').doc(DAYS[6]).get()
+    snapshots.push({...snapshot.data()})
+
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[0]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[1]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[2]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[3]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[4]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[5]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[3]).collection('days').doc(DAYS[6]).get()
+    snapshots.push({...snapshot.data()})
+
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[0]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[1]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[2]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[3]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[4]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[5]).get()
+    snapshots.push({...snapshot.data()})
+    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fechas[4]).collection('days').doc(DAYS[6]).get()
+    snapshots.push({...snapshot.data()})
 
     for (let n = 0; n<5; n++){
         monolito[`week${n}`] = []
         for (let m = 0; m<7; m++){
-            monolito[`week${n}`].push(snapshots[n+m].data())
+            console.log((7*n)+m)
+            monolito[`week${n}`].push(snapshots[(7*n)+m])
         }
     }
 
