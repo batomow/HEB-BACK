@@ -1,8 +1,23 @@
 const router = require('express').Router()
+const moment = require('moment')
+
+function inferFechas(fecha){
+    const dates = [] 
+    const date =  moment(fecha, 'D-M-YYYY')
+    for (let n = 0; n<5; n++){
+        dates.push(date.format("D-M-YYYY"))
+        date.subtract(7, "days")
+    }
+    return dates
+}
 
 const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 router.post('/all', async (req, res)=>{
     const {user, fecha } = req.body
+
+    //inferir las otras fechas
+    const fechas = inferFechas(fecha)
+
     const firestore = req.firestore
     const monolito = {} 
     let snapshot = await firestore.collection('user').doc(user).get()
@@ -14,24 +29,40 @@ router.post('/all', async (req, res)=>{
         })
     }
     monolito.user = snapshot.data()
-    snapshot = await firestore.collection('user').doc(user).collection('week').doc(fecha).get()
-    if (!snapshot.exists){
-        return res.send({
-            error: true,
-            message: "no hay calendario para esa fecha",
-            data: ""
-        })
+
+    const validationPromises = [] 
+    for (f of fechas){
+        validationPromises.push(firestore.collection('user').doc(user).collection('week').doc(f).get())
     }
-    monolito.resume = snapshot.data()
+    const validationSnapshots = await Promise.all(validationPromises)
+    
+    for (let n = 0; n<5; n++){
+        if (!validationSnapshots[n].exists){
+            return res.send({
+                error: true,
+                message: "no hay calendario para esa fecha",
+                data: f 
+            })
+        }
+        monolito[`resume${n}`] = (validationSnapshots[n].data())
+    }
+
     const promises = [] 
-    for (const day of DAYS){
-        promises.push(firestore.collection('user').doc(user).collection('week').doc(fecha).collection('days').doc(day).get())
+    for (f of fechas){
+        for (const day of DAYS){
+            promises.push(firestore.collection('user').doc(user).collection('week').doc(f).collection('days').doc(day).get())
+        }
     }
     const snapshots = await Promise.all(promises)
-    monolito.current = []
-    for (const index in DAYS){
-        monolito.current.push(snapshots[index].data())
+
+
+    for (let n = 0; n<5; n++){
+        monolito[`week${n}`] = []
+        for (const index in DAYS){
+            monolito[`week${n}`].push(snapshots[index].data())
+        }
     }
+
     res.send({
         error: false,
         message: "Bienvenido!", 
