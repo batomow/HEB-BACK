@@ -55,11 +55,10 @@ router.post('/all', async (req, res)=>{
     }
     const snapshots = await Promise.all(promises)
 
-
     for (let n = 0; n<5; n++){
         monolito[`week${n}`] = []
-        for (const index in DAYS){
-            monolito[`week${n}`].push(snapshots[index].data())
+        for (let m = 0; m<7; m++){
+            monolito[`week${n}`].push(snapshots[n+m].data())
         }
     }
 
